@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
+const { connect } = require('../database/db')
 
 /**
  * Get port from environment and store in Express.
@@ -25,11 +26,19 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, () => {
-  console.log(`server running on ${port}`)
-});
-server.on('error', onError);
-server.on('listening', onListening);
+connect().then(() => {
+  try {
+    server.listen(port, () => {
+      console.log(`server running on ${port}`)
+    });
+    server.on('error', onError);
+    server.on('listening', onListening);
+  } catch (err) {
+    console.log("Can't connect to the server!!")
+  }
+}).catch(() => {
+  console.log("Invalid Database connection!!")
+})
 
 /**
  * Normalize a port into a number, string, or false.

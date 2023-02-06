@@ -1,5 +1,10 @@
 const request = require('supertest')
 const app = require('../app')
+const { closeConnection, connect } = require('../database/db')
+
+beforeAll(async () => {
+    await connect()
+})
 
 describe('Cards API', () => {
     it('GET /cards should return list of cards', () => {
@@ -29,7 +34,7 @@ describe('Cards API', () => {
             .post('/cards')
             .send({
                 name: 'John',
-                cardNumber: '123456789',
+                cardNumber: '4485275742308327',
                 limit: 50000
             })
             .expect(201)
@@ -43,5 +48,27 @@ describe('Cards API', () => {
                     })
                 )
             })
+    })
+
+    it('POST /cards should throw error for invalid card number', () => {
+        return request(app)
+            .post('/cards')
+            .send({
+                name: 'John',
+                cardNumber: '123456789',
+                limit: 50000
+            })
+            .expect(400)
+    })
+
+    it('POST /cards should throw error for invalid card data', () => {
+        return request(app)
+            .post('/cards')
+            .send({
+                name: 'John',
+                cardNumber: 'xyz',
+                limit: ''
+            })
+            .expect(400)
     })
 })
