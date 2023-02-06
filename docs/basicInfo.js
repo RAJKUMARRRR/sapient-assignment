@@ -1,7 +1,7 @@
 module.exports = {
     openapi: "3.0.3",
     info: {
-      title: "Sapient Assignment Rest API with Swagger",
+      title: "Credit Card System Rest API with Swagger",
       description: "This is a simple CRUD API application made with Express and documented with Swagger",
       version: "1.0.0",
       contact: {

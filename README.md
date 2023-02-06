@@ -6,12 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm install`
-to download express server node modules
-
-### `cd client & npm install`
-to download react client node modules
-
+### `npm run setup`
+This will download all the dependencies and setup the developement.
 
 ### `npm start`
 
