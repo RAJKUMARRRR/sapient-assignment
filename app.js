@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+const cors = require('cors')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const swaggerUi = require('swagger-ui-express')
@@ -10,6 +11,7 @@ const docs = require('./docs');
 
 var app = express();
 
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
